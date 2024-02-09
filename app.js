@@ -18,16 +18,15 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 };
 
-app.use((req, res, next) => {
-	console.log(req.cookie);
-	next();
-});
+// app.use((req, res, next) => {
+// 	console.log(req.cookie);
+// 	next();
+// });
 
 
 app.use(express.json({ limit: '10kb'}));
 
-console.log(cookieParser)
-// app.use(cookieParser());
+app.use(cookieParser());
 app.use(xss());
 
 app.set('view engine', 'pug');

@@ -21,12 +21,6 @@ const User = sq.define("user", {
         unique: true
     },
 
-    role: {
-        type: DataTypes.STRING,
-        defaultValue: "user"
-
-    },
-
     password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -35,15 +29,9 @@ const User = sq.define("user", {
         }
     },
 
-    confirmPassword: {
-        type: DataTypes.VIRTUAL,
-        validate: {
-            len: [8, 18]
-        }
-    },
-
     passwordResetToken: {
         type: DataTypes.STRING,
+
 
     },
 
@@ -53,19 +41,13 @@ const User = sq.define("user", {
 
 });
 
-// this hooks check if the both confirm pasword and password are the same before creating the user
-User.beforeCreate(async function (user) {
-    if (user.password !== user.confirmPassword) {
-        throw new appError("provide a valid password", 400);
-    }
-});
+
 
 // this hooks encrypt pasword before saving to database
 User.beforeSave(async function (user) {
     if (user.changed('password')) {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         user.password = hashedPassword;
-        user.confirmPassword = null;
 
     }
 

@@ -10,7 +10,7 @@ const signToken = id => {
 };
 
 const cookiesOption = {
-    expires: new Date(Date.now() + process.env.JWT_COOKIES_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     sameSite: 'lax'
 };
@@ -23,9 +23,7 @@ exports.register = catchAsyncErr(async function (req, res, next) {
     const data = {
         username: req.body.username,
         email: req.body.email,
-        role: req.body.role,
         password: req.body.password,
-        confirmPassword: req.body.confirmPassword,
         passwordResetToken: req.body.passwordResetToken,
         passwordResetExpires: req.body.passwordResetExpires
     };
@@ -34,7 +32,7 @@ exports.register = catchAsyncErr(async function (req, res, next) {
 
     const token = signToken(newUser.id);
 
-    res.cookie('jwt', cookiesOption);
+    res.cookie('jwt', token, cookiesOption);
 
     res.status(201).json({
         sattus: "success",
@@ -65,7 +63,7 @@ exports.loginUser = catchAsyncErr(async function (req, res, next) {
     // if the user exist, sign token for the user
     const token = signToken(user.id);
 
-    res.cookie('jwt', cookiesOption);
+    res.cookie('jwt', token, cookiesOption);
 
     res.status(200).json({
         status: "success",
@@ -115,40 +113,40 @@ exports.protectRoutes = catchAsyncErr(async function (req, res, next) {
 
 exports.isLoggedIn = catchAsyncErr(async function (req, res, next) {
 
-    console.log(req.cookies);
 
        // verify the token
-    //     if (req.cookies.){
+        if (req.cookies.jwt){
 
-    //  //  console.log(req.cookies.jwt);
-    //     const decode = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+       //  console.log(req.cookies.jwt);
+        const decode = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
     
-    //    // check if the user still exist
-    //     const currentUser = await User.findByPk(decode.id);
+       // check if the user still exist
+        const currentUser = await User.findByPk(decode.id);
 
-    //     if (!currentUser) {
-    //         next();
-    //     };
+        if (!currentUser) {
+            next();
+        };
 
         
-    //     // this function check if the user changed password after the token was issued
-    //     function isPasswordChangedAt() {
-    //         const changeTimeStamp = parseInt(currentUser.createdAt.getTime() / 1000);
+        // this function check if the user changed password after the token was issued
+        function isPasswordChangedAt() {
+            const changeTimeStamp = parseInt(currentUser.createdAt.getTime() / 1000);
 
-    //         return decode.iat < changeTimeStamp;
-    //     };
+            return decode.iat < changeTimeStamp;
+        };
 
-    //     //  check if the user changed password after the token was issued
-    //     if (isPasswordChangedAt()) {
-    //         next();
-    //     };
+        //  check if the user changed password after the token was issued
+        if (isPasswordChangedAt()) {
+            next();
+        };
 
-    //    // User is logged in
-    //     req.locals.user = currentUser;
-    //     next();
-    // };
+       // User is logged in
+        req.locals.user = currentUser;
+        next();
+    };
     next();
 });
+
 
 exports.logout = catchAsyncErr(async function (req, res, next) {
     res.cookie('jwt', 'logout', {

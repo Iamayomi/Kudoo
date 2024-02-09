@@ -10,3 +10,8 @@ exports.getLoginForm = (req, res) => {
     });
 };
 
+exports.getSignupForm = (req, res) => {
+	res.status(200).render('register', {
+    	title: 'Register account'
+    });
+};

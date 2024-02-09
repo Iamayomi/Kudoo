@@ -2,33 +2,26 @@ doctype html
 head
   meta(charset='UTF-8')
   title kudoo | #{title}
-  link(rel='stylesheet', href='css/login.css')
+  link(rel='stylesheet', href='css/register.css')
 section
-  .signin_page
+  .signup_page
     .content
       img.login_logo(src='img/logo-icon.png', alt='KUBOOL')
-      h3 Login
+      h3 Register
       br
-      p
-        | Recieve anonymous compliments from your friends 
-        br
-        |  send anonymous messages to your friends for
-        |                         free.
     form(method='POST')
-      label.form_label(for='username') Username
+      label.form_label(for='username') Your Username
       input#username.form_input(type='username', name='username', placeholder='Enter your username', minlength='3', maxlength='15', autocomplete='off', required='')
       br
       label.form_label(for='password') Password
       input#password.form_input(type='password', name='password', placeholder='Enter your password', minlength='8', autocomplete='off', required='')
       br
-      button(name='btn-login')
+      button(name='btn-signup')
         span
-          | Login
+          | Register Account
       p.form_link(align='center')
-        a(href='#') Forgot Password
-      p.form_link(align='center')
-        a(href='/register') Don&apos;t Have an Account? Register
+        a(href='/login') Already Have an Account? Login
         
-script(src='/js/login.js')
+script(src='/js/register.js')
 script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
 
