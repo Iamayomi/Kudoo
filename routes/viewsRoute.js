@@ -5,9 +5,11 @@ const router = express.Router();
 
 
 router.use(authController.isLoggedIn);
-router.get('/', viewsController.headerContent);
+router.get('/', viewsController.homeContent);
 router.get('/login', viewsController.getLoginForm);
-router.get('/Register', viewsController.getSignupForm);
+router.get('/register', viewsController.getSignupForm);
+router.get('/addEmail', viewsController.getEmailForm);
+
 
 
 

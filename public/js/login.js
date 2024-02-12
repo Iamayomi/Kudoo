@@ -18,7 +18,7 @@ const login = async (username, password) => {
 	 if (res.data.status === 'success') {
 	 	window.setTimeout(()=> {
 	 		location.assign('/');
-	 	}, 1500);
+	 	}, 1000);
 	 }
 		
 	} catch(err){

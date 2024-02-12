@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require('../models/userModel');
 const appError = require("../utils/appErr");
 const catchAsyncErr = require("../utils/catchAsync");
-const {promisify} = require("util");
+const { promisify } = require("util");
 
 
 const signToken = id => {
@@ -22,7 +22,6 @@ exports.register = catchAsyncErr(async function (req, res, next) {
 
     const data = {
         username: req.body.username,
-        email: req.body.email,
         password: req.body.password,
         passwordResetToken: req.body.passwordResetToken,
         passwordResetExpires: req.body.passwordResetExpires
@@ -35,14 +34,34 @@ exports.register = catchAsyncErr(async function (req, res, next) {
     res.cookie('jwt', token, cookiesOption);
 
     res.status(201).json({
-        sattus: "success",
+        status: "success",
         token,
         data: {
             users: newUser
         }
     });
+
+    res.redirect('/addEmail');
+
     next();
 });
+
+
+exports.addEmail = async function (req, res, next){
+    try  {
+        const addEmail = await User.create(req.body.email);
+        await addEmail.save({ validate: false });
+
+        res.status(201).json({
+        status: "success",
+        data: {
+            user: addEmail
+        }
+    });
+    }catch(err){
+        res.status(400).send(err.message);
+    }
+}
 
 
 exports.loginUser = catchAsyncErr(async function (req, res, next) {
@@ -55,7 +74,7 @@ exports.loginUser = catchAsyncErr(async function (req, res, next) {
 
     const user = await User.findOne({ where: { username: username } });
 
-   // check if the username and password exist
+    // check if the username and password exist
     if (!user || !await User.comparePassword(password, user.password)) {
         return next(new appError('Invalid username or password', 401));
     };
@@ -78,7 +97,7 @@ exports.protectRoutes = catchAsyncErr(async function (req, res, next) {
 
     let token;
 
-    if (req.headers.authorization.startsWith('Bearer')) {
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(" ")[1];
     };
 
@@ -111,38 +130,38 @@ exports.protectRoutes = catchAsyncErr(async function (req, res, next) {
 });
 
 
+// for rendering pages no error
 exports.isLoggedIn = catchAsyncErr(async function (req, res, next) {
 
 
-       // verify the token
-        if (req.cookies.jwt){
+    // verify the token
+    if (req.cookies.jwt) {
 
-       //  console.log(req.cookies.jwt);
+        //  console.log(req.cookies.jwt);
         const decode = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
-    
-       // check if the user still exist
+
+        // check if the user still exist
         const currentUser = await User.findByPk(decode.id);
 
         if (!currentUser) {
             next();
         };
 
-        
-        // this function check if the user changed password after the token was issued
+        // This function check if the user changed password after the token was issued
         function isPasswordChangedAt() {
             const changeTimeStamp = parseInt(currentUser.createdAt.getTime() / 1000);
 
             return decode.iat < changeTimeStamp;
         };
 
-        //  check if the user changed password after the token was issued
+        // //  check if the user changed password after the token was issued
         if (isPasswordChangedAt()) {
             next();
         };
 
-       // User is logged in
-        req.locals.user = currentUser;
-        next();
+        // User is logged in
+        res.locals.user = currentUser;
+        return next();
     };
     next();
 });

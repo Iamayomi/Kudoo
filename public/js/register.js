@@ -9,17 +9,17 @@ const signup = async (username, password) => {
 	try{
 	    const res = await axios({
 			method: 'POST',
-			url: 'http://127.0.0.1:8080/kudoo/users/Register',
+			url: 'http://127.0.0.1:8080/kudoo/users/register',
 			data: {
 				username, password
 			}
 		})
-
-	 // if (res.data.status === 'success') {
-	 // 	window.setTimeout(()=> {
-	 // 		location.assign('/');
-	 // 	}, 1500);
-	 // }
+       console.log(res.data);
+	 if (res.data.status === 'success') {
+	 	window.setTimeout(()=> {
+	 		location.assign('/addEmail');
+	 	}, 500);
+	 }
 		
 	} catch(err){
 		console.log(err.response.data)

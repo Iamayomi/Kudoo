@@ -1,0 +1,28 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title kudoo | #{title}
+  link(rel='stylesheet', href='css/email.css')
+section
+  .signup_page
+    .content
+      img.login_logo(src='img/logo-icon.png', alt='KUBOOL')
+      h3 Add Email
+      br
+      p
+       | Add your Email so that you can change your password easily
+    form(method='POST')
+      label.form_label(for='email') Your Email
+      input#email.form_input(type='text', name='email', placeholder='email', minlength='3', maxlength='30', autocomplete='off', required='')
+      br
+      button(name='btn-email')
+        span
+          | Add Email
+      p.form_link(align='center')
+        a(href='/login') Skip For Now
+        
+script(src='/js/email.js')
+script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
+
+
+
