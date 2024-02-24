@@ -14,6 +14,10 @@ body {
     align-items: center;
 }
 
+p {
+    color: #ffffff;
+}
+
 section {
     margin-top: 3rem;
     background: #5cc61a;
@@ -22,12 +26,8 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.signup_page {
+.main_page {
     text-align: center;
-}
-
-p {
-    color: #ffffff;
 }
 
 h3 {
@@ -40,28 +40,22 @@ h3 {
     color: #fff;
 }
 
-.login_logo {
+.top_logo {
     width: 80px;
     margin-bottom: 20px;
 }
 
-form {
-    text-align: left;
+
+.button {
+    background: linear-gradient(to bottom, #3afa67, #7ff494);
     color: #fff;
-
-}
-
-.form_label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-.form_input {
+    border: none;
+    margin-top: 1rem;
+    padding: 10px 80px;
+    border-radius: 15px;
+    cursor: pointer;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #fafafa;
-    border: 4px solid #6e6d6d;
+    transition: background-color 0.3s ease;
 }
 
 a {
@@ -69,31 +63,6 @@ a {
     text-decoration: none;
 }
 
-button {
-    background: linear-gradient(to bottom, #3afa67, #7ff494);
-    margin-top: 20px; 
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 15px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background: linear-gradient(to bottom, #3afa67, #7ff494);
-
-}
-
-.form_link {
-    margin-top: 10px;
-}
-
-.form_link a {
-    color: #6e6d6d;
-    text-decoration: none;
-}
 
 
 footer {
@@ -106,11 +75,6 @@ footer {
     background-color: #000000;
 }
 
-.footer_link {
-    margin: 10rem;
-    color: #ffffff;
-    text-align: center;
-}
 
 /* Responsive Styles */
 @media only screen and (max-width: 600px) {
@@ -126,11 +90,7 @@ footer {
         margin-bottom: 15px;
     }
 
-    button {
+    .button {
         padding: 8px 16px;
-    }
-
-    .footer_link {
-        margin-left: 15rem;
     }
 }

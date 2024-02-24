@@ -2,6 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   title kudoo | #{title}
+  link(rel='icon', type='image/png', href='img/logo-icon.png')
   link(rel='stylesheet', href='css/register.css')
 section
   .signup_page
@@ -21,6 +22,9 @@ section
           | Register Account
       p.form_link(align='center')
         a(href='/login') Already Have an Account? Login
+
+- // FOOTER 
+  include _footer 
         
 script(src='/js/register.js')
 script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')

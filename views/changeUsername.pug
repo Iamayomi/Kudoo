@@ -1,0 +1,30 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title kudoo | #{title}
+  link(rel='icon', type='image/png', href='img/logo-icon.png')
+  link(rel='stylesheet', href='css/changeUsername.css')
+section
+  .main_page
+    .content
+      img.top_logo(src='img/logo-icon.png', alt='KUBOOL')
+      h3 Change Username
+      br
+      p You can change your username here.
+    form(method='POST')
+      label.form_label(for='username') New Username
+      br
+      input#username.form_input(type='text', name='username', placeholder='Enter new username here', minlength='3', maxlength='15', autocomplete='off', required='')
+      br
+      label.form_label(for='password') Current Password
+      br
+      input#password.form_input(type='password', name='password', placeholder='Enter current password here', minlength='8', maxlength='30', autocomplete='off', required='')
+      br
+      button.button
+        span
+          | Update Username
+      p.button(align='center')
+        a(href='/settings') Go Back 
+
+script(src='/js/changeUsername.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')

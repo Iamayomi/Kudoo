@@ -1,0 +1,33 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title kudoo | #{title}
+  link(rel='icon', type='image/png', href='img/logo-icon.png')
+  link(rel='stylesheet', href='css/home.css')
+section
+  .main_page
+    .content
+      img.top_logo(src='img/logo-icon.png', alt='KUBOOL')
+      h3 ayomidesherif290 Profile
+      br
+      h1 https://kudoo/ayomidesherif290
+    p
+      | Share your profile link &hearts; to get responses from your 
+      br
+      |  friend. Go to &quot;view Messages&quot; to check out the 
+      br
+      |  responses. &#x1F44C;
+    p.button(align='center')
+      a(href='/myMessage') View Messages 
+    p.button.btn_blue(align='center')
+      a(href='https://www.twitter.com/intent/tweet?url=https://example.com', target='_blank') Share on Twitter
+    p.button.btn_green(align='center')
+      a(href='https://api.whatsapp.com/send?text=https://example.com', target='_blank') Share on WhatApp 
+    p.button.btn_blue(align='center')
+      a(href='https://www.facebook.com/share.php?u=https://example.com', target='_blank') Share on Facebook 
+    p.button.btn_red(align='center')
+      a(href='https://www.instagram.com/share?url=https://example.com') Share on Instagram 
+    p.button(align='center')
+      a(href='/settings') Settings 
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')

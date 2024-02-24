@@ -2,6 +2,7 @@ doctype html
 head
   meta(charset='UTF-8')
   title kudoo | #{title}
+  link(rel='icon', type='image/png', href='img/logo-icon.png')
   link(rel='stylesheet', href='css/login.css')
 section
   .signin_page
@@ -28,7 +29,10 @@ section
         a(href='#') Forgot Password
       p.form_link(align='center')
         a(href='/register') Don&apos;t Have an Account? Register
-        
+
+- // FOOTER 
+  include _footer 
+
 script(src='/js/login.js')
 script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js')
 

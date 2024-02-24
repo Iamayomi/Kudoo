@@ -6,23 +6,30 @@ const forms = document.querySelector("form");
 
 const signup = async (username, password) => {
 
-	try{
-	    const res = await axios({
+	try {
+		const response = await axios({
 			method: 'POST',
-			url: 'http://127.0.0.1:8080/kudoo/users/register',
+			url: 'http://127.0.0.1:3000/kudoo/users/register',
 			data: {
 				username, password
-			}
+			},
+
 		})
-       console.log(res.data);
-	 if (res.data.status === 'success') {
-	 	window.setTimeout(()=> {
-	 		location.assign('/addEmail');
-	 	}, 500);
-	 }
-		
-	} catch(err){
-		console.log(err.response.data)
+
+		const token = response.data.token;
+
+        localStorage.setItem('token', token);
+
+		if (response.data.status === 'success') {
+			window.setTimeout(() => {
+				location.assign('/addEmail');
+			}, 500);
+		} else {
+			alert("sign up failed")
+		}
+
+	} catch (err) {
+		console.log(err.message)
 	}
 
 };

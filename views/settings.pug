@@ -1,0 +1,28 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title kudoo | #{title}
+  link(rel='icon', type='image/png', href='img/logo-icon.png')
+  link(rel='stylesheet', href='css/setting.css')
+section
+  .main_page
+    .content
+      img.top_logo(src='img/logo-icon.png', alt='KUBOOL')
+      h3 Settings
+      br
+      p.button(align='center')
+        a(href='/changeEmail') Change Email
+      p.button(align='center')
+        a(href='/changePassword') Change Password
+      p.button(align='center')
+        a(href='/changeUsername') Change Username 
+      p.button(align='center')
+        a(href='#') Disclaimer 
+      p.button(align='center')
+        a(href='$') Contact Us 
+      p.button(align='center')
+        a(href='/login') Logout 
+      p.button(align='center')
+        a(href='/home') Go Back 
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')

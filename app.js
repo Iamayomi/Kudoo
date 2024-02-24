@@ -1,9 +1,11 @@
 const express = require("express");
 const path = require("path");
+const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const xss = require("xss-clean");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
+const cors = require("cors");
 
 const userRoutes = require("./routes/userRoute");
 const msgRoutes = require("./routes/msgRoute");
@@ -18,13 +20,18 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 };
 
+app.use(cors());
+
 // app.use((req, res, next) => {
 // 	console.log(req.cookie);
 // 	next();
 // });
 
+app.use(bodyParser.json());
 
-app.use(express.json({ limit: '10kb'}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.json({ limit: '10kb' }));
 
 app.use(cookieParser());
 app.use(xss());

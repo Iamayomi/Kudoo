@@ -10,11 +10,18 @@ router.post('/register', authController.register);
 
 router.post('/login', authController.loginUser);
 router.get('/logOut', authController.logout);
-router.post('/addEmail', authController.addEmail);
 
 router.use(authController.protectRoutes);
 
-router.patch('/setting/updateMe', userController.updateUser);
+router.patch('/addEmail', userController.changeUserEmail);
+
+router.patch('/changePassword', userController.changeUserPassword);
+
+router.patch('/changeUsername', userController.changeUserUsername);
+
+
+
+// router.patch('/setting/updateMe', userController.updateUser);
 
 
 module.exports = router;

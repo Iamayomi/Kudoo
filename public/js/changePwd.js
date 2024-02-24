@@ -2,7 +2,7 @@
 
 const forms = document.querySelector("form");
 
-const Email = async (val) => {
+const changePassword = async (val) => {
 
 	try {
         const token = localStorage.getItem('token');
@@ -10,8 +10,8 @@ const Email = async (val) => {
 
 		const response = await axios({
 			method: 'PATCH',
-			url: 'http://127.0.0.1:3000/kudoo/users/addEmail', 
-			data: { email: val },
+			url: 'http://127.0.0.1:3000/kudoo/users/changePassword', 
+			data: { password: val },
 			headers: {
 				 'Authorization': `Bearer ${token}`,
 				 'X-Requested-With': 'XMLHttpRequest'
@@ -19,8 +19,8 @@ const Email = async (val) => {
 		});
 
 	    if (response.data.status === 'success') {
-			alert("Email changed successfully");
-	 };
+			alert("Password changed successfully");
+		 };
 
 	} catch(err) {
 		console.log(err.message)
@@ -31,6 +31,6 @@ const Email = async (val) => {
 
 forms.addEventListener('submit', e => {
 	e.preventDefault();
-	const email = document.getElementById('email').value;
-	Email(email);
+	const password = document.getElementById('password').value;
+	changePassword(password);
 });

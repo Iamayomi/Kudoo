@@ -10,9 +10,8 @@ const signToken = id => {
 };
 
 const cookiesOption = {
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
-    sameSite: 'lax'
+    expires: new Date(Date.now() + process.env.JWT_COOKIES_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    httpOnly: true
 };
 
 
@@ -41,27 +40,8 @@ exports.register = catchAsyncErr(async function (req, res, next) {
         }
     });
 
-    res.redirect('/addEmail');
-
     next();
 });
-
-
-exports.addEmail = async function (req, res, next){
-    try  {
-        const addEmail = await User.create(req.body.email);
-        await addEmail.save({ validate: false });
-
-        res.status(201).json({
-        status: "success",
-        data: {
-            user: addEmail
-        }
-    });
-    }catch(err){
-        res.status(400).send(err.message);
-    }
-}
 
 
 exports.loginUser = catchAsyncErr(async function (req, res, next) {
@@ -100,7 +80,6 @@ exports.protectRoutes = catchAsyncErr(async function (req, res, next) {
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(" ")[1];
     };
-
 
     if (!token) {
         next(new appError("You are not logged in, please log in to get access!", 401));
@@ -178,12 +157,6 @@ exports.logout = catchAsyncErr(async function (req, res, next) {
         status: 'success'
     });
 });
-
-
-
-
-
-
 
 
 

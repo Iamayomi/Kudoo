@@ -1,0 +1,29 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title kudoo | #{title}
+  link(rel='icon', type='image/png', href='img/logo-icon.png')
+  link(rel='stylesheet', href='css/myMessage.css')
+section
+  .main_page
+    h3 My Answers
+    br
+  p
+    | &#x1F447; Scroll &#x1F447; down to check out the messages that you
+    br
+    |         have received
+  .messages
+    p
+      b Message:
+    p I love coding
+    p - Anonymous [09-02-2024 19:30 GMT]
+    p.border_line
+      a(href='#') &#x2B50;Share Response &#x2B50;
+    p.border_line
+      a(href='#') Report/Spam
+    p.border_line
+      a(href='#') Archive
+  p.button(align='center')
+    a(href='/home') Go Back 
+
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')

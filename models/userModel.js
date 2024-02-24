@@ -48,8 +48,7 @@ User.beforeSave(async function (user) {
     if (user.changed('password')) {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         user.password = hashedPassword;
-
-    }
+    };
 
 });
 
