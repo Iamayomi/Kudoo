@@ -19,10 +19,11 @@ section
       p.button(align='center')
         a(href='#') Disclaimer 
       p.button(align='center')
-        a(href='$') Contact Us 
+        a(href='#') Contact Us 
       p.button(align='center')
-        a(href='/login') Logout 
+        a.logout(href='/login') Logout 
       p.button(align='center')
         a(href='/home') Go Back 
 
+script(src='/js/logout.js')
 script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')

@@ -10,7 +10,7 @@ const changeUsername = async (username, password) => {
 
 		const response = await axios({
 			method: 'PATCH',
-			url: 'http://127.0.0.1:3000/kudoo/users/changeUsername', 
+			url: 'http://127.0.0.1:8000/kudoo/users/changeUsername', 
 			data: { username, password },
 			headers: {
 				 'Authorization': `Bearer ${token}`,
@@ -33,6 +33,5 @@ forms.addEventListener('submit', e => {
 	e.preventDefault();
 	const username = document.getElementById('username').value;
 	const password = document.getElementById('password').value;
-	console.log(username, password);
 	changeUsername(username, password);
 });

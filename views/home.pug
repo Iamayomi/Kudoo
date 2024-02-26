@@ -8,9 +8,9 @@ section
   .main_page
     .content
       img.top_logo(src='img/logo-icon.png', alt='KUBOOL')
-      h3 ayomidesherif290 Profile
+      h3 #{user.username} Profile
       br
-      h1 https://kudoo/ayomidesherif290
+      h1 https://127.0.0.1:8000/kudoo/#{user.username}
     p
       | Share your profile link &hearts; to get responses from your 
       br
@@ -20,13 +20,13 @@ section
     p.button(align='center')
       a(href='/myMessage') View Messages 
     p.button.btn_blue(align='center')
-      a(href='https://www.twitter.com/intent/tweet?url=https://example.com', target='_blank') Share on Twitter
+      a(href=`https://www.twitter.com/intent/tweet?url=https://kudoo/${user.username}`, target='_blank') Share on Twitter
     p.button.btn_green(align='center')
-      a(href='https://api.whatsapp.com/send?text=https://example.com', target='_blank') Share on WhatApp 
+      a(href=`https://api.whatsapp.com/send?text=https://kudoo/${user.username}`, target='_blank') Share on WhatApp 
     p.button.btn_blue(align='center')
-      a(href='https://www.facebook.com/share.php?u=https://example.com', target='_blank') Share on Facebook 
+      a(href=`https://www.facebook.com/share.php?u=https://kudoo/${user.username}`, target='_blank') Share on Facebook 
     p.button.btn_red(align='center')
-      a(href='https://www.instagram.com/share?url=https://example.com') Share on Instagram 
+      a(href=`https://www.instagram.com/share?url=https://kudoo/${user.username}`) Share on Instagram 
     p.button(align='center')
       a(href='/settings') Settings 
 

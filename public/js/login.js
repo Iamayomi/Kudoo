@@ -9,7 +9,7 @@ const login = async (username, password) => {
 	try {
 		const response = await axios({
 			method: 'POST',
-			url: 'http://127.0.0.1:3000/kudoo/users/login',
+			url: 'http://127.0.0.1:8000/kudoo/users/login',
 			data: {
 				username, password
 			},

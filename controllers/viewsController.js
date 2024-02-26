@@ -1,3 +1,5 @@
+const message = require('../models/messageModel');
+
 exports.homeContent = (req, res) => {
     res.status(200).render('base', {
     	title: 'Anonymous Messages'
@@ -28,10 +30,18 @@ exports.getHomePage = (req, res) => {
     });
 };
 
-exports.getMyMessage = (req, res) => {
+exports.getMyMessage = async (req, res) => {
+  try {
+
+    const messages = await message.findAll();
+
     res.status(200).render('myMessage', {
-        title: 'My Message'
+        title: 'My Message',
+        messages
     });
+     }catch(err){
+        res.status(400).send(err.message);
+    }
 };
 
 exports.getSettingPage = (req, res) => {
@@ -58,5 +68,19 @@ exports.getChangeUsernamePage = (req, res) => {
     });
 };
 
+exports.getSendMessagePage = (req, res) => {
+        
+        res.status(200).render('sendMessage', {
+            title: 'Change Username',
+        });
+};
 
 
+exports.getSendMessagePage = async (req, res) => {
+
+    res.status(200).render('sendMessage', {
+        title: 'Change Username',
+        messages
+    });
+
+};

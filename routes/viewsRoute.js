@@ -15,6 +15,8 @@ router.get('/settings', viewsController.getSettingPage);
 router.get('/changeEmail', viewsController.getChangeEmailPage);
 router.get('/changePassword', viewsController.getChangePasswordPage);
 router.get('/changeUsername', viewsController.getChangeUsernamePage);
+router.get('/sendMessage', viewsController.getSendMessagePage);
+
 
 
 

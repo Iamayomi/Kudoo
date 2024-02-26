@@ -10,7 +10,7 @@ const Email = async (val) => {
 
 		const response = await axios({
 			method: 'PATCH',
-			url: 'http://127.0.0.1:3000/kudoo/users/addEmail', 
+			url: 'http://127.0.0.1:8000/kudoo/users/addEmail', 
 			data: { email: val },
 			headers: {
 				 'Authorization': `Bearer ${token}`,

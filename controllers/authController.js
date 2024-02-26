@@ -17,8 +17,8 @@ const cookiesOption = {
 
 if (process.env.NODE_ENV === 'production') cookiesOption.secure = true;
 
-exports.register = catchAsyncErr(async function (req, res, next) {
-
+exports.register = async function (req, res, next) {
+ try{
     const data = {
         username: req.body.username,
         password: req.body.password,
@@ -40,8 +40,10 @@ exports.register = catchAsyncErr(async function (req, res, next) {
         }
     });
 
-    next();
-});
+    } catch(err) {
+        res.status(400).send(err.message);
+    }
+};
 
 
 exports.loginUser = catchAsyncErr(async function (req, res, next) {
@@ -110,20 +112,20 @@ exports.protectRoutes = catchAsyncErr(async function (req, res, next) {
 
 
 // for rendering pages no error
-exports.isLoggedIn = catchAsyncErr(async function (req, res, next) {
-
-
+exports.isLoggedIn = async function (req, res, next) {
     // verify the token
     if (req.cookies.jwt) {
 
+     try {
         //  console.log(req.cookies.jwt);
         const decode = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
 
         // check if the user still exist
         const currentUser = await User.findByPk(decode.id);
 
+
         if (!currentUser) {
-            next();
+           return next();
         };
 
         // This function check if the user changed password after the token was issued
@@ -135,22 +137,24 @@ exports.isLoggedIn = catchAsyncErr(async function (req, res, next) {
 
         // //  check if the user changed password after the token was issued
         if (isPasswordChangedAt()) {
-            next();
+          return next();
         };
 
         // User is logged in
         res.locals.user = currentUser;
         return next();
-    };
+      } catch(err){
+         return next(err);
+      }
+     }
     next();
-});
+};
 
 
 exports.logout = catchAsyncErr(async function (req, res, next) {
-    res.cookie('jwt', 'logout', {
+    res.cookie('jwt', 'loggedout', {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true,
-        sameSite: 'lax'
     });
 
     res.status(200).json({

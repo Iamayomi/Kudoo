@@ -1,29 +1,35 @@
-const msg = require("../models/msgModel");
+const message = require("../models/messageModel");
 const User = require('../models/userModel');
 const appError =  require("../utils/appErr");
 const catchAsyncErr = require("../utils/catchAsync");
 
 
-exports.sendMsg = catchAsyncErr(async function (req, res) {
+// send message
+exports.sendMessage = catchAsyncErr(async function (req, res) {
+
+	    if(!req.body.username) req.params.username = req.user.username;
 
 		const user = await User.findOne({ where: { username: req.params.username } });
 
-		const sendMsg = await msg.create({ message: req.body.message, userId: user.id });
+		const sendMessage = await message.create({ message: req.body.message, userId: user.id });
 
 		res.status(201).json({
 			status: 'success',
 			data: {
-				messages: sendMsg
+				messages: sendMessage
 			}
 		})
 });
 
 
+// Get all messages
 exports.getAllMessages = catchAsyncErr(async function(req, res){
+
+	    if(!req.body.username) req.params.username = req.user.username;
 
 		const user = await User.findOne({ where: { username: req.params.username } });
 
-		const allmessages = await msg.findAll({ where: { userId: user.id } } );
+		const allmessages = await message.findAll({ where: { userId: user.id } } );
 
 		if (!allmessages) {
            return next(new appError("No messages yet", 400));

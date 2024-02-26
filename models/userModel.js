@@ -37,7 +37,7 @@ const User = sq.define("user", {
 
     passwordResetExpires: {
         type: DataTypes.DATE,
-    }
+    },
 
 });
 

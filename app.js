@@ -8,7 +8,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 
 const userRoutes = require("./routes/userRoute");
-const msgRoutes = require("./routes/msgRoute");
+const messageRoutes = require("./routes/messageRoute");
 const viewsRoutes = require("./routes/viewsRoute");
 const globalErrorHandler = require("./controllers/errController");
 const appError = require("./utils/appErr");
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', viewsRoutes);
 app.use('/kudoo/users', userRoutes);
-app.use('/kudoo/message', msgRoutes);
+app.use('/kudoo/message', messageRoutes);
 
 
 // URL error

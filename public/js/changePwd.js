@@ -10,7 +10,7 @@ const changePassword = async (val) => {
 
 		const response = await axios({
 			method: 'PATCH',
-			url: 'http://127.0.0.1:3000/kudoo/users/changePassword', 
+			url: 'http://127.0.0.1:8000/kudoo/users/changePassword', 
 			data: { password: val },
 			headers: {
 				 'Authorization': `Bearer ${token}`,

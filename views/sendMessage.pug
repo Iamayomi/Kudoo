@@ -1,0 +1,21 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title kudoo | 
+  link(rel='stylesheet', href='css/sendMessage.css')
+section
+  .main_page
+    .content
+      h3 Say Something..
+      br
+      .left
+        p Say Something About Me *
+        p Leave A message for ayomidesherif290.
+    form(method='POST')
+      input#email.form_input(type='text', name='text', placeholder='254 characters remaining', minlength='3', maxlength='254', autocomplete='off', required='')
+      br
+      button.button
+        span
+          | Send Message
+          
+script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js')

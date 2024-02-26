@@ -11,7 +11,7 @@ const errDev = (err, res) => {
 }
 
 const handleValidatorError = err => {
-	const message = `this ${err.path} has already been taken by a user ${err.value} input another ${err.path}`;
+	const message = `these ${err.path} has already been taken by a user ${err.value} input another ${err.path}`;
 	return new appError(message, 401)
 };
 

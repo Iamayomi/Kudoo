@@ -23,6 +23,7 @@ const Message = sq.define("message", {
                 msg: "message is required"
             }
         },
+        
         references: {
             model: User,
             key: 'id'
